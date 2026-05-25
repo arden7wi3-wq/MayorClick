@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>MayorClick — город в твоём Telegram | Промокоды дня</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: radial-gradient(circle at 10% 20%, #0a0f1e, #03050b);
+      font-family: 'Segoe UI', 'Poppins', 'Orbitron', system-ui, -apple-system, 'Inter', monospace;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem 1rem;
+    }
+
+    .neon-card {
+      max-width: 1300px;
+      width: 100%;
+      background: rgba(8, 12, 25, 0.55);
+      backdrop-filter: blur(10px);
+      border-radius: 3rem;
+      border: 1px solid rgba(0, 255, 255, 0.4);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 255, 255, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.05);
+      overflow: hidden;
+      transition: all 0.2s ease;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 2rem 1.5rem 1rem;
+      border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+      background: rgba(0, 0, 0, 0.3);
+    }
+
+    .glow-title {
+      font-size: 3.5rem;
+      font-weight: 800;
+      letter-spacing: 3px;
+      background: linear-gradient(135deg, #aaffff, #0ff, #f0f);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 10px #0ff8, 0 0 20px #0ff4;
+      margin-bottom: 0.5rem;
+    }
+
+    .tagline {
+      color: #b0f0ff;
+      font-size: 1.1rem;
+      background: #0a0f1ecc;
+      display: inline-block;
+      padding: 0.3rem 1.2rem;
+      border-radius: 40px;
+      backdrop-filter: blur(4px);
+      font-weight: 500;
+      border-left: 2px solid cyan;
+      border-right: 2px solid magenta;
+    }
+
+    .date-badge {
+      margin-top: 12px;
+      font-size: 0.8rem;
+      color: #88ddff;
+      background: #00000066;
+      display: inline-block;
+      padding: 4px 16px;
+      border-radius: 40px;
+      letter-spacing: 1px;
+    }
+
+    .tabs {
+      display: flex;
+      justify-content: center;
+      gap: 0.2rem;
+      padding: 1rem 1.5rem 0 1.5rem;
+      background: rgba(0, 0, 0, 0.4);
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      background: rgba(10, 20, 35, 0.8);
+      border: none;
+      padding: 0.8rem 2rem;
+      font-size: 1.1rem;
+      font-weight: bold;
+      font-family: inherit;
+      color: #bbe1ff;
+      cursor: pointer;
+      border-radius: 40px 40px 20px 20px;
+      transition: 0.2s;
+      backdrop-filter: blur(5px);
+      margin: 0 4px;
+      border-bottom: 2px solid transparent;
+    }
+
+    .tab-btn.active {
+      background: #0ff11a;
+      color: #010511;
+      text-shadow: 0 0 5px white;
+      border-bottom: 2px solid cyan;
+      box-shadow: 0 -5px 15px #0ff6, 0 0 12px cyan;
+    }
+
+    .tab-btn:hover:not(.active) {
+      background: #1f3a5f;
+      color: white;
+      border-bottom: 2px solid #0ff;
+    }
+
+    .tab-content {
+      padding: 2rem 2rem 2.5rem;
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .tab-content.active-tab {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+
+    .features-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.8rem;
+      justify-content: center;
+      margin: 1.5rem 0;
+    }
+
+    .feature {
+      background: rgba(0, 255, 255, 0.05);
+      border: 1px solid rgba(0, 255, 255, 0.5);
+      border-radius: 2rem;
+      padding: 1.2rem 1rem;
+      flex: 1 1 180px;
+      text-align: center;
+      transition: 0.2s;
+      backdrop-filter: blur(4px);
+      box-shadow: 0 0 8px cyan;
+    }
+
+    .feature:hover {
+      transform: scale(1.02);
+      background: rgba(0, 255, 255, 0.15);
+      box-shadow: 0 0 20px cyan;
+    }
+
+    .feature-icon {
+      font-size: 2.4rem;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .feature h3 {
+      color: #0ff;
+      margin-bottom: 0.4rem;
+    }
+
+    .feature p {
+      color: #cdedff;
+      font-size: 0.85rem;
+    }
+
+    .description-text {
+      color: #e0f2fe;
+      line-height: 1.5;
+      background: #01051460;
+      padding: 1.2rem;
+      border-radius: 1.5rem;
+      border-left: 6px solid #0ff;
+      margin: 1.5rem 0;
+      font-size: 1rem;
+    }
+
+    /* промо-блок */
+    .promo-day-badge {
+      background: #ff44cc30;
+      border: 1px solid magenta;
+      border-radius: 2rem;
+      padding: 0.3rem 1rem;
+      display: inline-block;
+      font-size: 0.8rem;
+      margin-bottom: 1rem;
+      color: #ffb3ff;
+    }
+
+    .promo-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .promo-card {
+      background: linear-gradient(125deg, #051020, #030617);
+      border-radius: 1.8rem;
+      padding: 1rem 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid #0ff;
+      box-shadow: 0 0 6px cyan;
+      transition: 0.2s;
+    }
+
+    .promo-card.highlight {
+      border: 2px solid #ff44ff;
+      box-shadow: 0 0 18px #ff66ff, 0 0 6px cyan;
+      background: linear-gradient(125deg, #0a1030, #020318);
+    }
+
+    .promo-card:hover {
+      box-shadow: 0 0 18px cyan;
+    }
+
+    .promo-code {
+      font-family: monospace;
+      font-size: 1.3rem;
+      font-weight: bold;
+      letter-spacing: 1.5px;
+      background: #000000aa;
+      padding: 0.2rem 1rem;
+      border-radius: 60px;
+      color: #ffb86b;
+      text-shadow: 0 0 4px orange;
+    }
+
+    .promo-reward {
+      font-size: 0.9rem;
+      color: #aaffdd;
+      font-weight: 600;
+      background: #1e1a3e;
+      padding: 0.3rem 1rem;
+      border-radius: 40px;
+    }
+
+    .copy-btn {
+      background: #ff44cc30;
+      border: 1px solid #ff66ff;
+      color: #ffccff;
+      padding: 0.4rem 1rem;
+      border-radius: 2rem;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.2s;
+    }
+
+    .copy-btn:hover {
+      background: #ff66ff;
+      color: black;
+      box-shadow: 0 0 15px #ff66ff;
+    }
+
+    .collapse-all {
+      margin-top: 1.5rem;
+      background: #1f2a4e70;
+      border-radius: 1.5rem;
+      padding: 0.5rem 1rem;
+    }
+
+    details {
+      background: #01051470;
+      border-radius: 1.5rem;
+      padding: 0.8rem;
+      margin-top: 1rem;
+      border: 1px solid cyan;
+    }
+
+    summary {
+      color: #88ffff;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    .all-codes-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .all-code-item {
+      background: #000000aa;
+      padding: 0.3rem 0.7rem;
+      border-radius: 2rem;
+      font-family: monospace;
+      font-size: 0.8rem;
+      color: #ffaa88;
+    }
+
+    .info-note {
+      color: #80ffea;
+      margin-top: 1rem;
+      text-align: center;
+      font-size: 0.8rem;
+      background: #00000055;
+      padding: 0.8rem;
+      border-radius: 2rem;
+    }
+
+    .neon-button {
+      background: none;
+      border: 2px solid cyan;
+      color: cyan;
+      padding: 12px 28px;
+      border-radius: 50px;
+      font-weight: bold;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: 0.2s;
+      margin-top: 1rem;
+      display: inline-block;
+    }
+
+    .neon-button:hover {
+      background: cyan;
+      color: #010101;
+      box-shadow: 0 0 20px cyan;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      color: #5599ff;
+      border-top: 1px solid cyan;
+      font-size: 0.75rem;
+      background: #00000040;
+    }
+
+    @media (max-width: 680px) {
+      .glow-title { font-size: 2.2rem; }
+      .tab-btn { padding: 0.4rem 1rem; font-size: 0.9rem; }
+      .promo-code { font-size: 0.9rem; }
+      .promo-reward { font-size: 0.7rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="neon-card">
+  <div class="hero">
+    <div class="glow-title">🏛️ MAYORCLICK</div>
+    <div class="tagline">⚡ твой город в Telegram — управляй, строй, получай промокоды ⚡</div>
+    <div class="date-badge" id="dateDisplay"></div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="about">📋 О ПРОЕКТЕ</button>
+    <button class="tab-btn" data-tab="promo">🎁 ПРОМОКОДЫ ДНЯ</button>
+  </div>
+
+  <!-- Вкладка ОПИСАНИЕ -->
+  <div id="about" class="tab-content active-tab">
+    <div class="description-text">
+      🤖 <strong>MayorClick</strong> — городской менеджер в Telegram. Ты — мэр, отвечаешь за районы, налоги, ЖКХ и стройку. 
+      Нажимай, инвестируй, вводи промокоды и получай бонусы каждый день. Никаких скачиваний — мегаполис в чате!
+    </div>
+    <div class="features-grid">
+      <div class="feature"><span class="feature-icon">🏗️</span><h3>Строй & Управляй</h3><p>35+ зданий, заводы, ТЭЦ, жилые кварталы</p></div>
+      <div class="feature"><span class="feature-icon">💰</span><h3>ЖКХ & Тарифы</h3><p>Коммуналка, скидки, субсидии от мэра</p></div>
+      <div class="feature"><span class="feature-icon">👥</span><h3>Клан мэров</h3><p>Объединяйся или соревнуйся</p></div>
+      <div class="feature"><span class="feature-icon">🎁</span><h3>Промокоды daily</h3><p>Новые коды каждые сутки — заходи за бонусами</p></div>
+    </div>
+    <div style="text-align: center;">
+      <p style="color:#bbffdd;">✨ Ежедневные ивенты, рейтинги, уникальные скины ✨</p>
+      <button class="neon-button" id="openBotBtn">🚀 СТАТЬ МЭРОМ 🚀</button>
+    </div>
+    <div class="info-note">
+      🔥 Промокоды обновляются каждый день в 00:00 по UTC. Не пропусти новый код!
+    </div>
+  </div>
+
+  <!-- Вкладка ПРОМОКОДЫ (динамические, ежедневное обновление) -->
+  <div id="promo" class="tab-content">
+    <div class="promo-day-badge">✨ АКТУАЛЬНЫЕ НА СЕГОДНЯ ✨</div>
+    <div id="dailyPromoCodes" class="promo-container">
+      <!-- сюда будут вставлены 4 промокода дня -->
+    </div>
+    
+    <div class="collapse-all">
+      <details>
+        <summary>📋 ПОЛНЫЙ СПИСОК ВСЕХ ПРОМОКОДОВ (20 шт.)</summary>
+        <div class="all-codes-list" id="fullCodesList"></div>
+        <div class="info-note" style="margin-top: 10px;">✅ Любой код можно активировать в игре один раз. Коды из категории ЖКХ дают скидки на коммуналку и ресурсы.</div>
+      </details>
+    </div>
+    <div class="info-note">
+      💡 <strong>Как активировать:</strong> в игре открой раздел «Промокоды» → введи код → получи награду.<br>
+      🗓️ Каждый день на этой странице показываются <strong>4 случайных промокода</strong> из общего пула. Завтра набор изменится!
+    </div>
+  </div>
+  <footer>
+    ⚡ MayorClick | Мэр нового поколения | Промокоды обновляются автоматически каждый день ⚡
+  </footer>
+</div>
+
+<script>
+  // ---------- ПОЛНЫЙ МАССИВ ПРОМОКОДОВ (20 штук) ----------
+  const ALL_PROMO_CODES = [
+    // Основные
+    "WELCOME_MER", "MERBOT_2025", "NEWMER_50", "HELLO_MAYOR", "MERRULEZ",
+    "JUST_JOINED", "MERBOT_FIRST", "HELLOCITY", "WELCOME_BDT", "MER_TOP",
+    // Категория ЖКХ
+    "KOMYHALKA_OFF", "PLATEZH_30", "UTILITY_SAVE", "KVARTIRA_BONUS", "SVET_TEPLO_50",
+    "OSNOVA_MIRA", "JKH_BOSS", "OPTIMY_BILL", "EKONOM_2025", "MOSOBL_LC"
+  ];
+
+  // Награды для промокодов (каждому коду — уникальное описание)
+  const REWARD_MAP = {
+    WELCOME_MER: "🎁 1000 монет + стартовый набор",
+    MERBOT_2025: "🤖 500 кристаллов + бот-помощник на 3 дня",
+    NEWMER_50: "🏅 50 алмазов + ускоритель стройки",
+    HELLO_MAYOR: "🏛️ 750 монет + скин «Ратуша неон»",
+    MERRULEZ: "⚡ 200 энергии + свиток ускорения",
+    JUST_JOINED: "👥 300 монет + +5 к репутации",
+    MERBOT_FIRST: "💎 100 кристаллов + эксклюзивный смайл",
+    HELLOCITY: "🏙️ 1200 монет + улучшение налоговой",
+    WELCOME_BDT: "📦 боевой пропуск 1 уровня",
+    MER_TOP: "👑 VIP-статус на 1 день + 2000 монет",
+    KOMYHALKA_OFF: "🔧 скидка 15% на коммуналку на 7 дней",
+    PLATEZH_30: "📉 -30% на оплату ЖКХ (3 дня)",
+    UTILITY_SAVE: "💡 экономия ресурсов + 500 энергии",
+    KVARTIRA_BONUS: "🏢 бонус к доходам с жилых кварталов",
+    SVET_TEPLO_50: "⚡ свет и тепло: -50% затрат на 2 дня",
+    OSNOVA_MIRA: "🕊️ 300 монет + мирный бонус",
+    JKH_BOSS: "🧾 управа ЖКХ: доп. доход 5%",
+    OPTIMY_BILL: "📊 оптимизация счетов + 1000 монет",
+    EKONOM_2025: "💰 экономия бюджета: 750 монет",
+    MOSOBL_LC: "🏆 областная льгота: +15% к производству"
+  };
+
+  // Функция получения "дня года" (чтобы каждый день был разный набор)
+  function getDaySeed() {
+    const now = new Date();
+    const start = new Date(now.getFullYear(), 0, 0);
+    const diff = now - start;
+    const oneDay = 86400000;
+    const dayOfYear = Math.floor(diff / oneDay);
+    return dayOfYear;
+  }
+
+  // Перемешивание массива с детерминированным seed (для одинакового выбора в течение дня)
+  function seededRandom(seed) {
+    const x = Math.sin(seed++) * 10000;
+    return x - Math.floor(x);
+  }
+
+  function getDailyPromoCodes() {
+    const seed = getDaySeed();
+    // копируем массив
+    let codesCopy = [...ALL_PROMO_CODES];
+    // перемешиваем на основе seed
+    for (let i = codesCopy.length - 1; i > 0; i--) {
+      const rand = Math.floor(seededRandom(seed + i) * (i + 1));
+      [codesCopy[i], codesCopy[rand]] = [codesCopy[rand], codesCopy[i]];
+    }
+    // берем первые 4 как промокоды дня
+    return codesCopy.slice(0, 4);
+  }
+
+  // Форматирование даты
+  function updateDateDisplay() {
+    const now = new Date();
+    const formatted = now.toLocaleDateString('ru-RU', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+    document.getElementById('dateDisplay').innerHTML = `📅 ${formatted} | промокоды обновлены`;
+  }
+
+  // Отрисовка ежедневных промокодов
+  function renderDailyCodes() {
+    const dailyCodes = getDailyPromoCodes();
+    const container = document.getElementById('dailyPromoCodes');
+    if (!container) return;
+    container.innerHTML = '';
+    dailyCodes.forEach(code => {
+      const reward = REWARD_MAP[code] || "🎁 Секретный бонус мэра";
+      const card = document.createElement('div');
+      card.className = 'promo-card';
+      // можно подсветить один из них рандомно, но оставим единообразно
+      card.innerHTML = `
+        <span class="promo-code">🔷 ${code}</span>
+        <span class="promo-reward">${reward}</span>
+        <button class="copy-btn" data-code="${code}">📋 Копировать</button>
+      `;
+      container.appendChild(card);
+    });
+    // перезапускаем обработчики копирования
+    attachCopyEvents();
+  }
+
+  // Заполнить полный список всех кодов (для details)
+  function renderFullCodesList() {
+    const container = document.getElementById('fullCodesList');
+    if (!container) return;
+    container.innerHTML = '';
+    ALL_PROMO_CODES.forEach(code => {
+      const reward = REWARD_MAP[code] || "Бонус мэра";
+      const chip = document.createElement('div');
+      chip.className = 'all-code-item';
+      chip.title = reward;
+      chip.innerHTML = `${code} <span style="color:#88ffaa; font-size:0.7rem;">✨</span>`;
+      container.appendChild(chip);
+    });
+  }
+
+  // Копирование промокодов
+  function attachCopyEvents() {
+    const copyBtns = document.querySelectorAll('.copy-btn');
+    copyBtns.forEach(btn => {
+      // удаляем старые, чтобы не дублировать
+      btn.removeEventListener('click', handleCopy);
+      btn.addEventListener('click', handleCopy);
+    });
+  }
+
+  function handleCopy(e) {
+    const code = e.currentTarget.getAttribute('data-code');
+    if (code) {
+      navigator.clipboard.writeText(code).then(() => {
+        const originalText = e.currentTarget.innerText;
+        e.currentTarget.innerText = '✅ Скопировано!';
+        setTimeout(() => {
+          e.currentTarget.innerText = originalText;
+        }, 1500);
+      }).catch(() => {
+        alert('Не удалось скопировать, но код: ' + code);
+      });
+    }
+  }
+
+  // Переключение вкладок
+  const tabsBtns = document.querySelectorAll('.tab-btn');
+  const contents = document.querySelectorAll('.tab-content');
+
+  function switchTab(tabId) {
+    contents.forEach(content => {
+      content.classList.remove('active-tab');
+      if (content.id === tabId) {
+        content.classList.add('active-tab');
+      }
+    });
+    tabsBtns.forEach(btn => {
+      btn.classList.remove('active');
+      if (btn.getAttribute('data-tab') === tabId) {
+        btn.classList.add('active');
+      }
+    });
+  }
+
+  tabsBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tabId = btn.getAttribute('data-tab');
+      if (tabId === 'about') switchTab('about');
+      if (tabId === 'promo') switchTab('promo');
+    });
+  });
+
+  // Кнопка открытия бота
+  const openBotBtn = document.getElementById('openBotBtn');
+  if (openBotBtn) {
+    openBotBtn.addEventListener('click', () => {
+      const botUsername = "MayorClickBot";  // замени на своего бота
+      window.open(`https://t.me/${botUsername}`, '_blank');
+    });
+  }
+
+  // Инициализация
+  updateDateDisplay();
+  renderDailyCodes();
+  renderFullCodesList();
+</script>
+</body>
+  </html>
